@@ -3,14 +3,12 @@ spring:
     name: api-gateway
 
   cloud:
-    loadbalancer:
-      ribbon:
-        enabled: false  # Desabilita o Ribbon, já que estamos usando Spring Cloud Load Balancer
     gateway:
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
+          include-expression: "'crud-service'.equals(serviceId) || 'db-service'.equals(serviceId)"
 
   config:
     import: "optional:configserver:http://localhost:8888"
@@ -18,7 +16,6 @@ spring:
 server:
   port: 8080
 
-# Configuração do Eureka Client
 eureka:
   instance:
     prefer-ip-address: true
