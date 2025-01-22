@@ -2,37 +2,5 @@ spring:
   application:
     name: api-gateway
 
-  cloud:
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
-          include-expression: "'crud-service'.equals(serviceId) || 'db-service'.equals(serviceId)"
-
   config:
-    import: "optional:configserver:http://localhost:8888"
-
-server:
-  port: 8080
-
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone:
-        http://localhost:8761/eureka,http://localhost:8762/eureka,http://localhost:8763/eureka
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
-logging:
-  level:
-    com.netflix.discovery: DEBUG
-    org.springframework.cloud.netflix.eureka: DEBUG
+    import: "configserver:http://localhost:8888"
